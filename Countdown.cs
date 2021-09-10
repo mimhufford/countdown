@@ -20,6 +20,8 @@ try { minutes = int.Parse(args[0]); }
 catch (Exception) { }
 TimeSpan total = new TimeSpan(0, minutes, 1);
 
+Console.SetWindowSize(53, 10);
+Console.SetBufferSize(53, 10);
 Console.Title = "Starting Soon!";
 Console.Clear();
 
