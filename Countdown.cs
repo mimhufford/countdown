@@ -56,6 +56,10 @@ while (true)
     switch (Console.ReadKey(true).Key)
     {
         case ConsoleKey.Escape: Environment.Exit(0); break;
+        case ConsoleKey.RightArrow: total += new TimeSpan(0, 0, 10); break;
+        case ConsoleKey.LeftArrow: total -= new TimeSpan(0, 0, 10); break;
+        case ConsoleKey.UpArrow: total += new TimeSpan(0, 1, 0); break;
+        case ConsoleKey.DownArrow: total -= new TimeSpan(0, 1, 0); break;
         default: Console.Clear(); break;
     }
 }
