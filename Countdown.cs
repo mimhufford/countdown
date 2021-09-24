@@ -16,7 +16,14 @@ var digits = new List<List<string>>
 
 var timer = Stopwatch.StartNew();
 int minutes = 3;
+//ConsoleColor enum reference: https://docs.microsoft.com/en-us/dotnet/api/system.consolecolor
+ConsoleColor bgColor = ConsoleColor.Red;
+ConsoleColor fgColor = ConsoleColor.DarkRed;
 try { minutes = int.Parse(args[0]); }
+catch (Exception) { }
+try { bgColor = (ConsoleColor)int.Parse(args[1]); }
+catch (Exception) { }
+try { fgColor = (ConsoleColor)int.Parse(args[2]); }
 catch (Exception) { }
 TimeSpan total = new TimeSpan(0, minutes, 1);
 
@@ -39,6 +46,14 @@ while (true)
         int s0 = remaining.Seconds / 10;
         int s1 = remaining.Seconds % 10;
 
+        if(remaining.Minutes == 0 && remaining.Seconds <= 10){
+            Console.BackgroundColor = (ConsoleColor)bgColor;
+            Console.ForegroundColor = (ConsoleColor)fgColor;
+        }else{
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
         foreach (var digit in digits)
         {
             Console.Write("  ");
@@ -60,6 +75,7 @@ while (true)
         case ConsoleKey.LeftArrow: total -= new TimeSpan(0, 0, 10); break;
         case ConsoleKey.UpArrow: total += new TimeSpan(0, 1, 0); break;
         case ConsoleKey.DownArrow: total -= new TimeSpan(0, 1, 0); break;
+        case ConsoleKey.Backspace: total=new TimeSpan(0, minutes, 1);timer.Reset();timer.Start();break;
         default: Console.Clear(); break;
     }
 }
